@@ -25,7 +25,10 @@ const { title, body, colSpan, rowSpan, href, colorText, height } = Astro.props;
 >
 	{
 		href ? (
-			<a class={`h-full w-full ${colorText || ""}`} href={href}>
+			<a
+				class={`h-full w-full ${colorText || ""} overflow-y-auto overflow-x-hidden`}
+				href={href}
+			>
 				<Icon
 					class="h-6 float-right group-hover:text-primary-500 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform ease-in-out duration-100 z-20"
 					name="ri:arrow-right-up-line"

@@ -79,7 +79,7 @@ const posts = (await getCollection("blog"))?.sort(
 							// >
 							<div class="list-none w-full text-neutral-100 hover:text-neutral-400 ease-in-out transition-colors border-b-neutral-400 border-dashed border-b-1 my-0">
 								<p class="inline-block whitespace-nowrap text-xs">
-									{post.data.title}
+									{post.data.title?.slice(0, 15) + "..."}
 								</p>
 								{post.data.pubDate && (
 									<time
