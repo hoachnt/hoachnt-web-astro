@@ -1,4 +1,5 @@
 ---
+import "./src/styles/global.css";
 import { LINKS } from "../lib/constants";
 
 interface Props {
@@ -97,6 +98,10 @@ const schema =
 		/>
 
 		<link href="https://cdn.fontshare.com" rel="preconnect" />
+		<link
+			href="https://api.fontshare.com/v2/css?f[]=zodiak@100,101,300,301,400,401,700,701,800,801,900,901&display=swap"
+			rel="stylesheet"
+		/>
 		{
 			page === "travel" && (
 				<link href={`${Astro.url.origin}/travel`} rel="canonical" />
@@ -125,24 +130,6 @@ const schema =
 </html>
 
 <style is:global>
-	@font-face {
-		font-family: "CabinetGrotesk";
-		src: url("/fonts/CabinetGrotesk-Variable.ttf")
-			format("truetype-variations");
-		font-weight: normal;
-		font-style: normal;
-		font-display: swap;
-		font-weight: 100 1000;
-	}
-	@font-face {
-		font-family: "Satoshi";
-		src: url("/fonts/Satoshi-Variable.ttf") format("truetype-variations");
-		font-weight: normal;
-		font-style: normal;
-		font-display: swap;
-		font-weight: 100 1000;
-	}
-
 	body {
 		margin: 0;
 		font-family: "Satoshi", sans-serif;

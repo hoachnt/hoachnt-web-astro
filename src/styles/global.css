@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@font-face {
+	font-family: "Cabinet Grotesk";
+	src: url("/fonts/CabinetGrotesk-Variable.ttf") format("truetype-variations");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	font-weight: 100 1000;
+}
+@font-face {
+	font-family: "Satoshi";
+	src: url("/fonts/Satoshi-Variable.ttf") format("truetype-variations");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	font-weight: 100 1000;
+}
+
+@theme {
+	--font-sans: "Cabinet Grotesk", "Satoshi", sans-serif;
+	--font-serif: "Zodiak", "ui-serif";
+
+	--color-gray-50: #fafafa;
+	--color-gray-100: #f5f5f5;
+	--color-gray-200: #e5e5e5;
+	--color-gray-300: #d4d4d4;
+	--color-gray-400: #a3a3a3;
+	--color-gray-500: #737373;
+	--color-gray-600: #525252;
+	--color-gray-700: #404040;
+	--color-gray-800: #262626;
+	--color-gray-900: #171717;
+
+	--color-darkslate-50: #3d3d3d;
+	--color-darkslate-100: #2c2c2c;
+	--color-darkslate-200: #262626;
+	--color-darkslate-300: #202020;
+	--color-darkslate-400: #1a1a1a;
+	--color-darkslate-500: #171717;
+	--color-darkslate-600: #141414;
+	--color-darkslate-700: #111111;
+	--color-darkslate-800: #0e0e0e;
+	--color-darkslate-900: #0b0b0b;
+
+	--color-primary-50: #f0fdf4;
+	--color-primary-100: #dcfce7;
+	--color-primary-200: #bbf7d0;
+	--color-primary-300: #86efac;
+	--color-primary-400: #4ade80;
+	--color-primary-500: #22c55e;
+	--color-primary-600: #16a34a;
+	--color-primary-700: #15803d;
+	--color-primary-800: #166534;
+	--color-primary-900: #14532d;
+	--color-primary-950: #052e16;
+
+	--box-shadow-custom: 2px 2px 0;
+	--box-shadow-custom-hover: 1px 1px 0;
+
+	--grid-rows-auto-250: repeat(auto-fill, 250px);
+	--grid-cols-4-minmax: repeat(4, minmax(150px, 1fr));
+}
