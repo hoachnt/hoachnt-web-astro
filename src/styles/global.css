@@ -55,8 +55,8 @@
 	--color-primary-900: #14532d;
 	--color-primary-950: #052e16;
 
-	--box-shadow-custom: 2px 2px 0;
-	--box-shadow-custom-hover: 1px 1px 0;
+	--box-shadow-custom: 2px 2px var(--color-primary-500);
+	--box-shadow-custom-hover: 1px 1px var(--color-primary-500);
 
 	--grid-rows-auto-250: repeat(auto-fill, 250px);
 	--grid-cols-4-minmax: repeat(4, minmax(150px, 1fr));
