@@ -1,4 +1,10 @@
-import { type JSX, Show, createSignal } from "solid-js";
+import {
+	type JSX,
+	Show,
+	createSignal,
+	onCleanup,
+	createEffect,
+} from "solid-js";
 
 type Props = {
 	children: JSX.Element;
@@ -6,7 +12,10 @@ type Props = {
 
 function Tooltip(props: Props) {
 	const [isVisible, setIsVisible] = createSignal(false);
+	const [shouldRender, setShouldRender] = createSignal(false);
 	const [clickCount, setClickCount] = createSignal(0);
+	const [animateText, setAnimateText] = createSignal(false);
+	let timeoutId: number;
 
 	const messages = [
 		"Hi there!",
@@ -36,40 +45,60 @@ function Tooltip(props: Props) {
 
 	const currentMessage = () => {
 		const count = clickCount();
-		if (count >= messages.length) {
-			return messages[messages.length - 1];
-		}
-		return messages[count];
+		return count >= messages.length
+			? messages[messages.length - 1]
+			: messages[count];
 	};
+
+	const showTooltip = () => {
+		setClickCount((c) => c + 1);
+		setShouldRender(true);
+		setTimeout(() => setIsVisible(true), 10); // allow transition
+
+		// trigger text animation
+		setAnimateText(false);
+		setTimeout(() => setAnimateText(true), 50);
+
+		clearTimeout(timeoutId);
+		timeoutId = window.setTimeout(() => {
+			setIsVisible(false);
+			setTimeout(() => setShouldRender(false), 300); // wait for fade-out
+		}, 2000);
+	};
+
+	onCleanup(() => clearTimeout(timeoutId));
+
+	createEffect(() => {
+		if (!isVisible()) {
+			clearTimeout(timeoutId);
+		}
+	});
 
 	return (
 		<div class="relative inline-block">
-			<div
-				onMouseDown={() => {
-					setIsVisible(!isVisible());
-					if (isVisible()) {
-						setClickCount((count) => count + 1);
-					}
-				}}
-				onMouseUp={() => {
-					setIsVisible(false);
-				}}
-				onTouchStart={() => {
-					setIsVisible(!isVisible());
-					if (isVisible()) {
-						setClickCount((count) => count + 1);
-					}
-				}}
-				onTouchEnd={() => {
-					setIsVisible(false);
-				}}
-			>
+			<div onMouseDown={showTooltip} onTouchStart={showTooltip}>
 				{props.children}
 			</div>
 
-			<Show when={isVisible()}>
-				<div class="absolute left-1/2 -translate-x-1/2 -translate-y-24 mt-1 w-auto max-h-[70px] p-2 bg-black text-white text-center rounded-lg z-10 shadow-(--box-shadow-custom) border border-primary-500 whitespace-normal after:content-[''] after:block after:rotate-45 after:w-4 after:h-4 after:shadow-(--box-shadow-custom) after:shadow-primary-500 after:absolute after:-bottom-2 after:-translate-x-1/2 after:left-1/2 after:bg-black after:z-20">
-					<p class="w-max">{currentMessage()}</p>
+			<Show when={shouldRender()}>
+				<div
+					class={`absolute left-1/2 -translate-x-1/2 -translate-y-24 mt-1 w-auto max-h-[70px] p-2 bg-black text-white text-center rounded-lg z-10 border border-primary-500 whitespace-normal
+						shadow-(--box-shadow-custom) after:shadow-(--box-shadow-custom)
+						after:content-[''] after:block after:rotate-45 after:w-4 after:h-4
+						after:shadow-primary-500 after:absolute after:-bottom-2 after:-translate-x-1/2
+						after:left-1/2 after:bg-black after:z-20
+						transition-all duration-300 ease-in-out
+						backdrop-blur-sm
+						${isVisible() ? "opacity-100 blur-0" : "opacity-0 blur-sm"}
+					`}
+				>
+					<p
+						class={`w-max transition-all duration-300 ease-in-out
+							${animateText() ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"}
+						`}
+					>
+						{currentMessage()}
+					</p>
 				</div>
 			</Show>
 		</div>
