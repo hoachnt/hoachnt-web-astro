@@ -9,6 +9,7 @@ import Now from "../components/Now.astro";
 import Globe from "../components/Globe";
 import { getCollection } from "astro:content";
 import { formatDate } from "../lib/helpers";
+import { Icon } from "astro-icon/components";
 
 const posts = (await getCollection("blog"))?.sort(
 	(blogEntryA, blogEntryB) =>
@@ -54,7 +55,7 @@ const posts = (await getCollection("blog"))?.sort(
 			colorText="text-neutral-900"
 			colSpan="md:col-span-1"
 			href="travel"
-			rowSpan="md:row-span-1"
+			rowSpan="md:row-span-2"
 			title="Countries I visited"
 		>
 			<div class="h-full w-full absolute inset-0 z-10 top-0 left-0">
@@ -101,6 +102,22 @@ const posts = (await getCollection("blog"))?.sort(
 						))
 					)
 				}
+			</div>
+		</Card>
+		<Card colSpan="md:col-span-1" rowSpan="md:row-span-2">
+			<div class="flex justify-center items-center flex-col gap-2">
+				<Icon class="h-20 w-20" name="material-icon-theme:nix" />
+
+				<p>
+					I use
+					<a
+						href="https://nixos.org/"
+						target="_blank"
+						class="text-primary-500 hover:underline underline-offset-1"
+						>NixOS</a
+					>
+					btw.
+				</p>
 			</div>
 		</Card>
 		<Card colSpan="md:col-span-1" rowSpan="md:row-span-1">
