@@ -61,3 +61,23 @@
 	--grid-rows-auto-250: repeat(auto-fill, 250px);
 	--grid-cols-4-minmax: repeat(4, minmax(150px, 1fr));
 }
+
+html[data-theme="dark"] .astro-code,
+html[data-theme="dark"] .astro-code span {
+	color: var(--shiki-dark) !important;
+	background-color: var(--shiki-dark-bg) !important;
+}
+
+html[data-theme="light"] .astro-code,
+html[data-theme="light"] .astro-code span {
+	color: var(--shiki-light) !important;
+	background-color: var(--shiki-light-bg) !important;
+}
+
+code {
+	background: transparent !important;
+}
+
+.katex-html {
+	display: none;
+}

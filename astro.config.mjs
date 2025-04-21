@@ -6,6 +6,8 @@ import icon from "astro-icon";
 
 import solidJs from "@astrojs/solid-js";
 import { remarkReadingTime } from "./src/lib/remark-reading-time.mjs";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 import svelte from "@astrojs/svelte";
 
@@ -29,8 +31,20 @@ export default defineConfig({
 		svelte(),
 	],
 	markdown: {
-		remarkPlugins: [remarkReadingTime],
+		remarkPlugins: [remarkReadingTime, remarkMath],
+		rehypePlugins: [rehypeKatex],
+
+		syntaxHighlight: "shiki", // или "prism" для prism.js
+		shikiConfig: {
+			themes: {
+				dark: "gruvbox-dark-soft",
+				light: "gruvbox-light-soft",
+			},
+			theme: "gruvbox-dark-soft", // любые поддерживаемые темы: 'nord', 'monokai', 'dracula', и т.д.
+			langs: ["ts", "js", "go", "nix"],
+		},
 	},
+
 	output: "server",
 	adapter: vercel({
 		webAnalytics: {
